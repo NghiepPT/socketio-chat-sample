@@ -1,4 +1,4 @@
-var socket = io("http://localhost:50000/")
+var socket = io("https://chatchitvn.herokuapp.com/")
 socket.on("server-send-fail", function (data) {
     alert(data);
 });

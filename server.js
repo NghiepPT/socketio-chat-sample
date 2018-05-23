@@ -6,7 +6,7 @@ app.set("views", "./views");
 
 var server = require("http").Server(app);
 var io = require("socket.io")(server);
-server.listen(50000);
+server.listen(process.env.PORT||50000);
 
 var UserNames = ["AAA"];
 io.on("connection", function(socket){
