@@ -1,5 +1,8 @@
 body{
-    background-color: #bccbe2 
+    background-color: #2361ce;
+}
+#usr, #pwd, #eml{
+    width: 400px; 
 }
 #warrper{
     width: 600; 
@@ -48,4 +51,25 @@ body{
 #annoucement{
  background-color: transparent;
  font-style: italic;
+}
+#loginForm {  
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:15%;
+    margin-bottom: 10%;
+    width: 40%;
+    height: auto;
+    padding-left: 5%;
+    padding-top:3%;
+    padding-bottom:3%;
+    background-color: #f4f5f7;
+    border-style: none; 
+
+}
+#loginForm.h4{
+    text-align: center;
+}
+#txtSgFail{
+ color: red;
 }
