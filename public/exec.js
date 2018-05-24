@@ -29,9 +29,12 @@ socket.on("user-leave-typing", function(){
     $("#annoucement").html("");
 });
 
-socket.on("server-send-login-success",function(data){
+socket.on("server-send-login-success", function(data){
     $("#loginForm").hide();
     $("#chatForm").show();
+    $("#currentUser").html(data);
+});
+socket.on("server-send-user-online",function(data){
     $("#boxtContent").html("");
     data.forEach(function (i) {
         $("#boxtContent").append("<div class='user'>" + i + "</div>");

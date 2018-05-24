@@ -65,7 +65,8 @@ socket.on("client-send-login-request", function(data){
                             onUsers.push(result.usr);
                             socket.UserName = result.usr;
                         }
-                        io.sockets.emit("server-send-login-success",onUsers);
+                        socket.emit("server-send-login-success",result.usr);
+                        io.sockets.emit("server-send-user-online",onUsers);
                     }
                     else{
                         socket.emit("server-send-login-fail");
