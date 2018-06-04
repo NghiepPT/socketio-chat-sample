@@ -2,7 +2,22 @@ body{
     background-color: #2361ce;
 }
 #usr, #pwd, #eml{
-    width: 400px; 
+    width: 80%; 
+    margin-left: auto;
+    margin-right: auto;
+}
+#ctrl-form h4{
+text-align: center;
+}
+#btnGroup{
+    display: inline-block;
+    text-align: center;
+    margin-left: 10%;   
+
+}
+.btn{
+    margin-left: auto;
+    margin-right: auto;
 }
 #warrper{
     width: 600; 
@@ -12,17 +27,19 @@ body{
     background-color:transparent; 
     border-width: solid 1px black
 }
-#left, #right{
-    min-height: 300px;
-}
 #left{
-    width: 30%; float: left;
-     background-color: #5a90e2
+    width: 20%; float: left;
+    height: 100%;
+    background-color:  #ffffff;
+    min-height: 100%;
+    
 }
 #right{
-    width: 70%;
+    width: 80%;
+    height: 100%;
     float:right;
-    background-color: #d4f9f8
+    background-color: #d4f9f8;
+   
 }
 #boxTitle
 {
@@ -31,45 +48,230 @@ body{
     text-align: center;
     font-weight: bold;
 }
-#boxtContent
-{
-    border: solid 1px black;
-    border-top: node;
-    padding: 5px;
+#me-chatvn{
+    margin-top: 20px;
+    border-bottom: 1px solid #e3e8e7;  
+    height: 100px;    
+    
+}
+
+#me-infor{    
+    width: 100%;   
+    height:55%;   
+   margin-top:auto;
+ 
+}
+#me-infor:hover{
+    cursor: pointer;
+}
+.avatar{
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    float: left; 
+    margin-left: 20px;
+
+   
+  }
+
+#displayname{ 
+    font-size: 25px;
+    font-weight: bold; 
+    line-height: 25px;
+    font-family: 'Times New Roman', Times, serif;
+  
+
+}
+#displayname:hover{
+    color: aqua;
+}
+#status{
+    font-size: 12px;
+    line-height: 1.5385em;
+    top: .3592307692em;
+    font-weight: 400;
+    font-style: italic;
+    color: #8CA8B4;
+  
+}
+#status:hover{
+    color: aqua;
+}
+#menubar{
+    margin: auto;
+    height: 50px;    
+  
+}
+.addfrd{
+    margin-right: 10px;
+    float: right;  
+    margin-top:10px;
+    display: block;
+    width: 40px;
     text-align: center;
+    height: 40px;   
+    border-radius: 50%;
+     padding: 8px;
+}
+
+.addfrd:hover{
+    cursor: pointer; 
+    background-color: #eff3f9;
+}
+.icon-add-friend:hover{
+    cursor: pointer;   
+}
+/* .icon-add-friend{
+    background-color: transparent;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;  
+    margin: auto;    
+   }
+   
+
+.icon-add-friend:hover{
+    cursor: pointer;
+    background-color: #c2efea;
+   
+} */
+.glyphicon-plus{    
+    font-size: 20px;
+    color:#96e1f2;
+    font-weight: 400;
+    line-height: 20px; 
+    vertical-align: baseline;
+    height: 20px;
+    width: 20px;    
+}
+#separator{
+ margin-top: auto;
+  margin-left: 20px;  
+  height: 20px;
+
+}
+.fav{
+    margin-top: auto;
+    position: static;
+}
+#listFriend{
+    height: 65%;
+    margin-top: 20px;
+
+}
+
+.frd{    
+    margin-top:10px;    
+}
+.frd:hover{
+    background-color:#c2efea;
+    cursor: pointer; 
 }
 #sayHi{
     text-align: right;
 }
 #listMessage{
-    height: 200px; background-color: #fcead4
+    height: 70%; 
+    background-color:#eff7f6
+}
+#msgBox{
+    background-color: transparent;
+    height:30px;  
+    border: medium none; 
+    position: relative;
+    outline: medium none;
+    margin-top:10px;
+    white-space: pre-line;
+    width: 80%;
 }
 
-#txtMessage{
-    background-color: transparent; border: solid 1px black
+.content{
+    background-color: #bfefe9;
+    padding: .25em 1.5em .75em 1em;
+    position: relative;
+    margin-left: 75px;
+    border:none solid none;
+    width: 70%;
+    border-radius:2%;
+}
+.name{
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 15px;
+    top: 2.5833px;
+    color: #8CA8B4;
+}
+
+.user{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 25px;
+    font-weight: 500;
+    line-height: 25px;
+    top: 2.5833px;
+    color: #c4ccc1;
+}
+#iconSearch{
+    margin-left: auto;
+}
+.presence-status{
+    background-color:#8CA8B4;
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;
+    display: block;
+    position: absolute;
+}
+#searchFriend{
+    width: 80%;
+    float: right;
+    border: none;
+}
+#searchFriend:hover{
+    border:  none;
+}
+#txtArea{
+    width: 80%; 
 }
 #annoucement{
  background-color: transparent;
  font-style: italic;
 }
-#loginForm {  
+#ctrl-form {  
     display: block;
     margin-left: auto;
     margin-right: auto;
     margin-top:15%;
     margin-bottom: 10%;
     width: 40%;
-    height: auto;
-    padding-left: 5%;
+    height: auto; 
     padding-top:3%;
     padding-bottom:3%;
     background-color: #f4f5f7;
     border-style: none; 
 
 }
-#loginForm.h4{
+#ctrl-form.h4{
     text-align: center;
 }
 #txtSgFail{
  color: red;
+}
+#add-new-friend{
+    background-color: #ffffff;
+    height: 200px;
+    width: 400px;
+    margin:auto;
+    
+}
+#add-new-friend p{
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+}
+.ctrl-name-friend{
+    width: 80%;
+    margin: auto;
+}
+.btnAdd{
+    margin: auto;
 }
