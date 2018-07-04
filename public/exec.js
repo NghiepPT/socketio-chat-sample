@@ -1,9 +1,9 @@
-//var socket = io("https://chatchitvn.herokuapp.com/");
+var socket = io("https://chatchitvn.herokuapp.com/");
 /**
  * socket io listening.
  * This area is used to define listening events which are emited from server
  */
-var socket = io("http://localhost:50000/");
+//var socket = io("http://localhost:50000/");
 var currentUser;
 socket.on("server-send-reg-fail", function () {
     alert("User name is exist");
