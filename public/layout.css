@@ -2,9 +2,7 @@ body{
     background-color: #2361ce;
 }
 #usr, #pwd, #eml{
-    width: 80%; 
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%; 
 }
 #ctrl-form h4{
 text-align: center;
@@ -15,9 +13,10 @@ text-align: center;
     margin-left: 10%;   
 
 }
-.btn{
-    margin-left: auto;
-    margin-right: auto;
+#btnSignIn{
+    float: right;
+    width: 108px;
+    background-color: #2361ce;
 }
 #warrper{
     width: 600; 
@@ -28,14 +27,15 @@ text-align: center;
     border-width: solid 1px black
 }
 #left{
-    width: 20%; float: left;
+    width: 30%; 
+    float: left;
     height: 100%;
     background-color:  #ffffff;
     min-height: 100%;
     
 }
 #right{
-    width: 80%;
+    width: 70%;
     height: 100%;
     float:right;
     background-color: #d4f9f8;
@@ -118,7 +118,7 @@ text-align: center;
     cursor: pointer; 
     background-color: #eff3f9;
 }
-.icon-add-friend:hover{
+add-friend:hover{
     cursor: pointer;   
 }
 /* .icon-add-friend{
@@ -157,42 +157,55 @@ text-align: center;
 #listFriend{
     height: 65%;
     margin-top: 20px;
-
+    overflow: auto;
 }
 
 .frd{    
-    margin-top:10px;    
+    margin-top:10px; 
+    background-color:transparent;   
 }
 .frd:hover{
-    background-color:#c2efea;
+   background-color:#c2efea;
     cursor: pointer; 
 }
 #sayHi{
     text-align: right;
 }
-#listMessage{
-    height: 70%; 
-    background-color:#eff7f6
+#group-conversation{
+    height: 70px;
+    border-bottom: 1px solid #e8ebef;
+    background-color:#eff7f6;
+}
+#listMessage{  
+    height: 500px;
+    background-color:#eff7f6;
+    overflow: auto;
 }
 #msgBox{
     background-color: transparent;
-    height:30px;  
+    min-height:30px;  
     border: medium none; 
-    position: relative;
     outline: medium none;
     margin-top:10px;
     white-space: pre-line;
     width: 80%;
+}  
+.message{
+    width: 1000px;
+    display: inline-block;
 }
-
 .content{
+    display: inline-block;
     background-color: #bfefe9;
     padding: .25em 1.5em .75em 1em;
-    position: relative;
     margin-left: 75px;
-    border:none solid none;
-    width: 70%;
+    border:none solid none;  
     border-radius:2%;
+    width: 600px;
+}
+.creation{
+    display: inline; 
+    margin-left: 20px; 
 }
 .name{
     font-size: 12px;
@@ -248,6 +261,8 @@ text-align: center;
     padding-bottom:3%;
     background-color: #f4f5f7;
     border-style: none; 
+    padding: 30px;
+  
 
 }
 #ctrl-form.h4{
@@ -255,6 +270,8 @@ text-align: center;
 }
 #txtSgFail{
  color: red;
+ margin-left: auto;  
+ margin-right: auto; 
 }
 #add-new-friend{
     background-color: #ffffff;
@@ -274,4 +291,13 @@ text-align: center;
 }
 .btnAdd{
     margin: auto;
+}
+.no-account{
+    text-align: left;
+    float: left;
+    line-height: 36px;
+
+}
+.no-account:hover{
+    cursor: pointer;
 }

@@ -1,5 +1,9 @@
-var socket = io("https://chatchitvn.herokuapp.com/");
-//var socket = io("http://localhost:50000/");
+//var socket = io("https://chatchitvn.herokuapp.com/");
+/**
+ * socket io listening.
+ * This area is used to define listening events which are emited from server
+ */
+var socket = io("http://localhost:50000/");
 var currentUser;
 socket.on("server-send-reg-fail", function () {
     alert("User name is exist");
@@ -15,7 +19,7 @@ socket.on("server-send-friend-list", function(data){
     data.forEach(function(i){
         $("#listFriend").append("<div class='frd'>"
         +"<img class= 'avatar' align='left' src='https://avatar.skype.com/v1/avatars/pham.nghiep87?auth_key=-1911296691&returnDefaultImage=false&cacheHeaders=true'></img>"
-        +"<div class='user'>" + i.myfriend + "</div>" + "<div id='status'>Offline</div> "+"</div>");    
+        +"<div class='user'>" + i + "</div>" + "<div id='status'>Offline</div> "+"</div>");    
     }); 
  
 });
@@ -67,9 +71,12 @@ socket.on("server-send-user-off", function (data) {
 });
 
 socket.on("server-send-message", function (data) {
-    $("#listMessage").append("<div class='message'>" + "<img class= 'avatar' src='https://avatar.skype.com/v1/avatars/pham.nghiep87?auth_key=-1911296691&returnDefaultImage=false&cacheHeaders=true'/></img>"+"<div class='name'>" + data.usr + 
-    "</div>" + "<div class='content'>" 
-    + data.coversation + "</div>" + "</div>");
+    if(currentUser == data.user){
+        $("#listMessage").append("<div class='message'>" + "<img class= 'avatar' src='https://avatar.skype.com/v1/avatars/pham.nghiep87?auth_key=-1911296691&returnDefaultImage=false&cacheHeaders=true'/></img>"+"<div class='name'>" + data.usr + 
+        "</div>" + "<div class='content'>" 
+        + data.message + "</div>" + "<div class='creation'>" + data.time +"</div>"+ "</div>");
+    }
+
 });
 
 socket.on("user-typing-message", function(data){
@@ -87,11 +94,81 @@ socket.on("server-send-login-success", function(data){
     currentUser = data;
 });
 
+socket.on("server-send-add-friend-success",function(data){
+    init();
+    viewform("ADD_FRIEND_SUCCESS");
+    var style;
+    if(data.status == "Online") {
+        style = "style='color: #4ccc16'";
+    }
+    else{
+        style = "style='color: #c4ccc1'";
+    }
+    var frd = "<div class='frd'><img class= 'avatar' align='left' src='https://avatar.skype.com/v1/avatars/pham.nghiep87?auth_key=-1911296691&returnDefaultImage=false&cacheHeaders=true'></img>";
+    var usr = "<div class ='user'" + style + ">" + data.friend  + "</div>" + "<div id='status'>" + data.status + "</div> "+"</div>";
+    var friend = frd + usr;
+    $("#listFriend").append(friend);
+});
+
+socket.on("server-send-added-friend", function(data){
+    init();
+    viewform("ADD_FRIEND_SUCCESS");
+    var style;
+    if(data.status == "Online") {
+        style = "style='color: #4ccc16'";
+    }
+    else{
+        style = "style='color: #c4ccc1'";
+    }
+    var frd = "<div class='frd'><img class= 'avatar' align='left' src='https://avatar.skype.com/v1/avatars/pham.nghiep87?auth_key=-1911296691&returnDefaultImage=false&cacheHeaders=true'></img>";
+    var usr = "<div class ='user'" + style + ">" + data.friend  + "</div>" + "<div id='status'>" + data.status + "</div> "+"</div>";
+    var friend = frd + usr;
+    $("#listFriend").append(friend);
+});
+
 socket.on("server-send-login-fail", function(){
    // $("#ctrl-form").show();
     $("#txtSgFail").show();
 });
+socket.on("server-send-add-friend", function(data){
+    var accerpt = confirm(data.myname + " wants to make friend with you!");
+    if(accerpt == true){
+        socket.emit("we-are-friend", data);
+    }
+})
 
+socket.on("server-send-last-session", function(data){
+    $("#group-conversation").append(data);
+});
+
+/**
+ * 
+ */
+socket.on("server-send-history", function(data){
+    $("#listMessage").html("");
+    data.forEach(function(rec){
+        var dt = new Date(rec.datetime);
+        var creation = dt.getDate()+" "+ dt.getMonth() + " "+ dt.getHours() + ":" + dt.getMinutes() +":"+ dt.getSeconds();
+        $("#listMessage").append("<div class='message'>" + "<img class= 'avatar' src='https://avatar.skype.com/v1/avatars/pham.nghiep87?auth_key=-1911296691&returnDefaultImage=false&cacheHeaders=true'/></img>"+"<div class='name'>" + rec.from + 
+        "</div>" + "<div class='content'>" 
+        + rec.message + "</div>" + "<div class='creation'>" + creation +"</div>"+"</div>");
+    })
+ 
+   // $("#listMessage").append(data);
+});
+socket.on("server-send-pending-friend", function(data){
+    init();
+    viewform("ADD_FRIEND_SUCCESS");
+    var style;  
+    style = "style='color: #c4ccc1'";
+    var frd = "<div class='frd'><img class= 'avatar' align='left' src='https://avatar.skype.com/v1/avatars/pham.nghiep87?auth_key=-1911296691&returnDefaultImage=false&cacheHeaders=true'></img>";
+    var usr = "<div class ='user'" + style + ">" + data.myfriend  + "</div>" + "<div id='status'>pending</div> "+"</div>";
+    var friend = frd + usr;
+    $("#listFriend").append(friend);
+});
+/**
+ * Common method
+ */
 function init() {
     
     $("#ctrl-form").hide();
@@ -151,6 +228,18 @@ function viewform(view_state)
             $("#pwd").show();
             break;  
         }
+        case "ADD_FRIEND":
+        {
+            $("#ctrl-form").show();
+            $("#usr").show();
+            $("#btnAdd").show();
+            break;
+        }
+        case "ADD_FRIEND_SUCCESS":
+        {
+            $("#chatForm").show();
+            break;
+        }
         case "REGISTER_SUCCESS":
         {
             $("#ctrl-form").hide();
@@ -164,6 +253,10 @@ function viewform(view_state)
     } 
 
 }
+/**
+ * Jquery listening events to exec some action
+ * 
+ */
 $(document).ready(function () {
  
   
@@ -177,8 +270,11 @@ $(document).ready(function () {
 
     $("#msgBox").keyup(function (event) {
         if(event.keyCode == 13)
-        {
-            socket.emit("user-send-message", $("#msgBox").val());
+        {  
+            var friend = $("#group-conversation").find(".user").text();
+
+            var msg = {message: $("#msgBox").val(), sendto: friend, time: $.now()  };
+            socket.emit("user-send-message", msg);
             $("#msgBox").val("");
         }
     });
@@ -195,8 +291,9 @@ $(document).ready(function () {
         var info ={usr: $("#usr").val(), pwd:$("#pwd").val()}
         socket.emit("client-send-login-request",info);
     });
+
     $("#btnReg").click(function(){
-        var info = {email: $("#eml").val(), usr: $("#usr").val(), pwd:$("#pwd").val()}
+        var info = {email: $("#eml").val(), usr: $("#usr").val(), pwd:$("#pwd").val()};
         socket.emit("send-register-form", info);
     });
 
@@ -206,13 +303,20 @@ $(document).ready(function () {
         $(".text-title").append("<h4>Create account</h4>");
         viewform("REGISTER");
     });
-    $(".icon-add-friend").click(function(){
+
+    $(".add-friend").click(function(){
         init();
+        initfield();
         $("#ctrl-form").show();
-        $("#btnAdd").show();   
-        $("#usr").show();   
+        $(".text-title").append("<h4>Add new friend</h4>");
+        viewform("ADD_FRIEND");
     });
     
+    $("#btnAdd").click(function(){
+        var document = {myname: $("#displayname").text(), myfriend: $("#usr").val()}
+        socket.emit("user-send-add-friend", document);
+    })
+
     $("#txtMessage").focusin(function(){
         socket.emit("user-send-typing-message");
     });
@@ -220,4 +324,20 @@ $(document).ready(function () {
         socket.emit("user-send-leave-typing");
     });
 
+    $("#listFriend").on('click','.frd', function(){
+      
+
+        $("#listFriend").each(function(){
+            $(this).find('.frd').css('background-color','transparent');
+        });
+
+        $(this).css('background-color','#c2efea');      
+          
+        var user = $(this).find('.user').text();   
+        $("#group-conversation").html("");
+        $("#group-conversation").append($(this).html());
+        $("#listMessage").html("");
+       currentUser = user;
+        socket.emit("client-send-current-session", user);
+    });
 });
